@@ -1,0 +1,6 @@
+//hard-refresh the browsersync window before making changes
+//  to make sure the browser doesn't use cached css files
+.test {
+  height: 50%;
+  width: percentage(5/7);
+}
