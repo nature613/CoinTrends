@@ -1,3 +1,17 @@
-.test {
-  height: 50%;
-  width: 71.42857%; }
+nav {
+  display: flex;
+  justify-content: space-between; }
+
+nav .brand {
+  padding: 0.5em 0.5em; }
+
+nav ul {
+  display: inline-flex;
+  padding: 0;
+  margin: 0; }
+
+nav ul li {
+  padding: 0.5em 0.5em; }
+
+td img {
+  width: 25px; }

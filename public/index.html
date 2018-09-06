@@ -8,9 +8,48 @@
 </head>
 <body>
 
+  <nav>
+    <div class="brand">CoinTrends</div>
+    <ul>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+    </ul>
+  </nav>
 
+  <div id="app">
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Rank</td>
+          <td>Short</td>
+          <td>Name</td>
+          <td>Price (USD)</td>
+          <td>Market Cap (USD)</td>
+          <td>7-Day Change</td>
+          <td>Graph</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-cloak v-for="(coin, index) in coins">
+          <td>{{ index+1 }}</td>
+          <td>{{ coin.short }}</td>
+          <td><img v-bind:src="getCoinImage(coin.short)">{{ coin.long }}</td>
+          <td>{{ coin.price | currency }}</td>
+          <td>{{ coin.mktcap | currency }}</td>
+          <td>{{  }}</td>
+          <td>Graph</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>{{ coins[0].shapeshift }}</div>
+  </div> <!-- app end -->
 
-
-  <script src="assets/main.min.js"></script>
+  
+  <script src="js/vue.js"></script>
+  <script src="js/vue2-filters.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/app.js"></script>
+  
 </body>
 </html>

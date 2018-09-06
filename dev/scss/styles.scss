@@ -1,6 +1,22 @@
 //hard-refresh the browsersync window before making changes
 //  to make sure the browser doesn't use cached css files
-.test {
-  height: 50%;
-  width: percentage(5/7);
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+nav .brand {
+  padding: 0.5em 0.5em;
+}
+nav ul {
+  display: inline-flex;
+  padding: 0;
+  margin: 0;
+}
+nav ul li {
+  padding: 0.5em 0.5em;
+}
+
+td img {
+  width: 25px;
 }

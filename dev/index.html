@@ -5,22 +5,55 @@
   <title>CoinTrends</title>
   
   <!--build:css assets/styles.min.css-->
+  <link rel="stylesheet" href="css/minireset.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/another-stylesheet.css">
   <!--endbuild-->
 </head>
 <body>
 
-  <div class="test">
-    
-  </div>
+  <nav>
+    <div class="brand">CoinTrends</div>
+    <ul>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+    </ul>
+  </nav>
 
+  <div id="app">
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Rank</td>
+          <td>Short</td>
+          <td>Name</td>
+          <td>Price (USD)</td>
+          <td>Market Cap (USD)</td>
+          <td>7-Day Change</td>
+          <td>Graph</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-cloak v-for="(coin, index) in coins">
+          <td>{{ index+1 }}</td>
+          <td>{{ coin.short }}</td>
+          <td><img v-bind:src="getCoinImage(coin.short)">{{ coin.long }}</td>
+          <td>{{ coin.price | currency }}</td>
+          <td>{{ coin.mktcap | currency }}</td>
+          <td>{{ coin.coinHist }}</td>
+          <td>Graph</td>
+        </tr>
+      </tbody>
+    </table>
+    <div v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
+  </div> <!-- app end -->
 
-
-  <!--build:js assets/main.min.js -->
-  <!--<script src="js/lib/a-library.js"></script>
-  <script src="js/lib/another-library.js"></script>-->
+  
+  <script src="js/vue.js"></script>
+  <script src="js/vue2-filters.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="js/app.js"></script>
-  <!-- endbuild -->
+  
 </body>
 </html>

@@ -17,11 +17,12 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
 var useref = require('gulp-useref');
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify-es').default;
 var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
 var del = require('del');
 var runSequence = require('run-sequence');
+//var envify = require('envify/custom')
 //
 
 // // // 'gulp watch' tasks including preprocessing css // // // 
@@ -32,7 +33,7 @@ gulp.task('browserSync', function(){
     server: {
       baseDir: 'dev'
     },
-    port: 8080
+    port: 8081
   });
 });
 
@@ -71,7 +72,7 @@ gulp.task('clear:public', function() {
 gulp.task('useref', function(){
   return gulp.src('dev/*.html')
     .pipe(useref())
-    .pipe(gulpIf('*.js', uglify()))
+    //.pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('public'));
 });
@@ -94,11 +95,21 @@ gulp.task('images', function(){
 // build - runs a sequence of gulp tasks to rebuild public/:
 //   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images and fonts to public/assets
 gulp.task('build', function (callback) {
-  runSequence('clear:public', 
+  runSequence('clear:public',
+  //'browserify',
     /*['sass', 'useref', 'fonts', 'images'],*/ // for if I end up using fonts again
     ['sass', 'useref', 'images'],
     callback
   );
 });
+
+/*browserify(browserifyOptions)
+  .transform(vueify)
+  .transform(
+    // Required in order to process node_modules files
+    { global: true },
+    envify({ NODE_ENV: 'production' })
+  )
+  .bundle()*/
 
 // // //                                                                       // // //
