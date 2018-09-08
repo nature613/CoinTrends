@@ -41,7 +41,7 @@
           <td><img v-bind:src="getCoinImage(coin.short)">{{ coin.long }}</td>
           <td class="align-right">{{ coin.mktcap | numeralFormat('($ 0.00a)') }}</td>
           <td class="align-right">{{ coin.price | numeralFormat('$0,0.00') }}</td>
-          <td class="align-right" v-bind:style="{ color: coin.color,}">{{ coin.coinHist | numeralFormat('0.000') }} %</td>
+          <td class="align-right" v-bind:style="{ color: coin.color,}">{{ coin.coinHist | numeralFormat('0.000') }}%</td>
           <td>
             <div style="height: 80px; width: 150px; margin-bottom: -16px; border: 1px solid black" v-bind:id="'chartContainer'+(index)"></div>
             <!-- the above needs to iterate across ids-->
