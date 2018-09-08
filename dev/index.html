@@ -28,10 +28,10 @@
           <td>Rank</td>
           <td>Short</td>
           <td>Name</td>
-          <td>Price (USD)</td>
           <td>Market Cap (USD)</td>
+          <td>Price (USD)</td>
           <td>7-Day Change</td>
-          <td>Graph</td>
+          <td>Graph (CanvasJS.com)</td>
         </tr>
       </thead>
       <tbody>
@@ -39,21 +39,28 @@
           <td>{{ index+1 }}</td>
           <td>{{ coin.short }}</td>
           <td><img v-bind:src="getCoinImage(coin.short)">{{ coin.long }}</td>
-          <td>{{ coin.price | currency }}</td>
-          <td>{{ coin.mktcap | currency }}</td>
-          <td>{{ coin.coinHist }}</td>
-          <td>Graph</td>
+          <td class="align-right">{{ coin.mktcap | numeralFormat('($ 0.00a)') }}</td>
+          <td class="align-right">{{ coin.price | numeralFormat('$0,0.00') }}</td>
+          <td class="align-right" v-bind:style="{ color: coin.color,}">{{ coin.coinHist | numeralFormat('0.000') }} %</td>
+          <td>
+            <div style="height: 80px; width: 150px; margin-bottom: -16px; border: 1px solid black" v-bind:id="'chartContainer'+(index)"></div>
+            <!-- the above needs to iterate across ids-->
+          </td>
         </tr>
       </tbody>
     </table>
     <div v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
   </div> <!-- app end -->
 
-  
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script src="js/vue.js"></script>
-  <script src="js/vue2-filters.min.js"></script>
+  <script src="js/vue-numerals.min.js"></script>
+  <!--<script src="js/vue2-filters.min.js"></script>-->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="js/app.js"></script>
-  
+  <script src="js/chart.js"></script>
+
+
 </body>
 </html>

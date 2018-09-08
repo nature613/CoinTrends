@@ -8,7 +8,7 @@
 //  gulp build:
 //    Delete contents of public/ ready for rebuild,
 //    Compile all .scss files into .css files and copy .css into public/assets/,
-//    Concatenate and minify .css and .js files and publish index.html into public/,
+//    Concatenate and minify .css files and publish index.html into public/,
 //    Copy images from dev/assets/images/ into public/assets/images/.
 //    
 
@@ -64,7 +64,7 @@ gulp.task('watch', ['browserSync', 'sass'], function(){
 
 // clear:public - deletes everything in public/ directory, to clean up unused files before public/ can be rebuilt
 gulp.task('clear:public', function() {
-  return del.sync(['public/**', '!public']); //must ignore parent directory if you don't want it to be deleted too
+  return del.sync(['public/**/*', 'public/js/**', '!public']); //must ignore parent directory if you don't want it to be deleted too
 });
 
 // useref - copies html files from dev/ to public/,
@@ -77,39 +77,27 @@ gulp.task('useref', function(){
     .pipe(gulp.dest('public'));
 });
 
-// fonts - copies fonts from dev/fonts/ to public/fonts/
-//  temporarily removed since I'm no longer using downloaded fonts
-/*gulp.task('fonts', function() {
-  return gulp.src('dev/assets/fonts/*')
-  .pipe(gulp.dest('public/assets/fonts'));
-});*/
-
-// images - copies images from dev/images to public/images/
+// images - copies images from dev/images/ to public/images/
 //   separate from gulp fonts, in case I want to replace this with imagemin in the future, to compress images.
 //   currently not planning on having any large images in this project, though.
 gulp.task('images', function(){
   return gulp.src('dev/assets/images/*')
-  .pipe(gulp.dest('public/assets/images'));
+    .pipe(gulp.dest('public/assets/images'));
 });
+
+// scripts - copies .js files from dev/js/ to public/js/
+gulp.task('scripts', function(){
+  return gulp.src('dev/js/**/*')
+    .pipe(gulp.dest('public/js'));
+})
 
 // build - runs a sequence of gulp tasks to rebuild public/:
 //   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images and fonts to public/assets
 gulp.task('build', function (callback) {
   runSequence('clear:public',
-  //'browserify',
-    /*['sass', 'useref', 'fonts', 'images'],*/ // for if I end up using fonts again
-    ['sass', 'useref', 'images'],
+    ['sass', 'scripts', 'useref', 'images'],
     callback
   );
 });
-
-/*browserify(browserifyOptions)
-  .transform(vueify)
-  .transform(
-    // Required in order to process node_modules files
-    { global: true },
-    envify({ NODE_ENV: 'production' })
-  )
-  .bundle()*/
 
 // // //                                                                       // // //

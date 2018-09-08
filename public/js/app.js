@@ -1,7 +1,8 @@
 let COINCAP_API_URI = "https://coincap.io";
 let CRYPTOCOMPARE_API_URI = "https://min-api.cryptocompare.com/data";
 let CRYPTOCOMPARE_IMG_URI = "https://www.cryptocompare.com";
-let UPDATE_INTERVAL = 60 * 1000; //60ms * 1000 = 60s
+//let UPDATE_INTERVAL = 60 * 1000; //60ms * 1000 = 60s
+//Vue.use(VueNumerals);
 
 let app = new Vue({
   el: "#app",
@@ -43,8 +44,9 @@ let app = new Vue({
           return new Promise((resolve, reject) => {
             axios.get(`https://coincap.io/history/7day/${short}`)
             .then(response => {
-              var len = response.data.price.length
-              return resolve((response.data.price[len-1][1] / response.data.price[0][1]) - 1);
+              //////var len = response.data.price.length
+              //////return resolve((response.data.price[len-1][1] / response.data.price[0][1]) - 1);
+              return resolve(response.data.price)
               //console.log(response.data.price)
               //return resolve(response.data.price)
             })
@@ -56,12 +58,12 @@ let app = new Vue({
         //an async version of forEach function for iterating axios.get
         async function asyncForEach(array, callback) {
           for (let index = 0; index < array.length; index++) {
-            await callback(array[index], index, array)
+            await callback(array[index], index, array);
           }
         }
         //function to run the iterated axios.get
         const start = async() => {
-          console.log(this.coins)
+          console.log(this.coins);
           await asyncForEach(this.coins, async (coin) => {
             await getCoinHist(coin.short).then((price) => {
               /*console.log(`7day: ${coin.short}: ${price}`)
@@ -75,25 +77,31 @@ let app = new Vue({
               console.log(this.coins[ind]);
               //this.coins[ind]["coinHist"] = price;
               //console.log(this.coins)
-              console.log(this.coins.coinHist);
-              //this.coins[]
-              //[BTC,]*/
-              // I have coin.short
-              // I need to know position of coin.short in coinshorts
+              console.log(this.coins.coinHist);*/
+              // Array of position of coin.short in coinshorts
               var ind = "";
               ind = coinShorts.indexOf(coin.short);
-              this.coins[ind].coinHist = price;
+              var len = price.length;
+              var priceChange = (price[len-1][1] / price[0][1]) - 1; ///checkcheckCHECKCHECK
+              this.coins[ind].coinHist = priceChange;
+              if (priceChange < 0) {
+                this.coins[ind].color = 'red';
+              } else {
+                this.coins[ind].color = 'green';
+              }
               //Vue.set(this.coins, ind, price);
-              console.log(this.coins[1].coinHist);
-              //this.coins[0].shapeshift = ind;
+              //console.log(this.coins[1].coinHist);
+              makeChart(price, ind); /*global makeChart*/
+              //console.log("Price: "+price+", ind: "+ind);
+              this.coins[0].shapeshift = ind;
               //I have short name
               
               
               //just have to figure out how to get the coinhist into the .data here sequentially
             })
           })
-          console.log('Done')
-          console.log(this.coins[5].coinHist)
+          console.log('Done');
+          console.log(this.coins[5].coinHist);
           this.coins[0].shapeshift = "temp";
           ////can also push all coins here if needs be, with use of a temporary array/object?
         }
@@ -104,49 +112,10 @@ let app = new Vue({
         .catch((err) => {
           console.error(err);
         });
-      //defining function to get 7day coin History
-
-      
-      /*
-          var mainObject = {},
-              promises = [];
-          var myUrl;
-          for(var k in resp.data) {
-            console.log(k, resp.data[k]);
-            console.log(k, resp.data[k].short);
-            myUrl = COINCAP_API_URI + "/history/7day/" + resp.data[k].short;
-            promises.push(axios.get(myUrl));
-            //resp.data[k].coinHist = (coinHist(resp.data[k].short));
-          }*/
-          /*axios.all(promises).then(function(results) {
-            results.forEach(function(response) {
-              mainObject[response.identifier] = response.value;
-            });
-          });
-          function coinHist(short) {
-            return axios.get(COINCAP_API_URI + "/history/7day/" + short)
-              .then((respo) => {
-                //console.log(resp.data.price)
-                var len = respo.data.price.length;
-                console.log(len);
-                console.log(short);
-                console.log(respo.data.price[len-1][1]);
-                console.log((respo.data.price[len-1][1] / respo.data.price[0][1] ) - 1);
-                return (respo.data.price[len-1][1] / respo.data.price[0][1]) - 1;
-                console.log(this.coins[1].coinHist["'[[PromiseValue]]'"])
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          }
-          console.log(this.coins)
-          
-        */
     },
     
     getCoinImage: function(short) {
-      //VeChain workaround while there's token swap confusion
-      short = (short === "VEN" ? "VET" : short);
+      short = (short === "VEN" ? "VET" : short); //VeChain logo workaround while there's confusion about the new VeChain fork
       try {
         return CRYPTOCOMPARE_IMG_URI + this.coinData[short].ImageUrl;
       } catch(err) {
@@ -154,27 +123,9 @@ let app = new Vue({
       }
     },
     
-    /*getCoinHist: function(short) {
-      function coinHist(short) {
-        return axios.get(COINCAP_API_URI + "/history/7day/" + short)
-          .then((resp) => {
-            //console.log(resp.data.price)
-            var len = resp.data.price.length;
-            console.log(len);
-            console.log(short);
-            console.log(resp.data.price[len-1][1]);
-            console.log((resp.data.price[len-1][1] / resp.data.price[0][1] ) - 1);
-            resp = (resp.data.price[len-1][1] / resp.data.price[0][1]) - 1;
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-    }*/
-    
   },
   created: function() {
+    //on pageload, begin with an initial run of getCoinData
     this.getCoinData();
-    //this.getCoinHist();
   }
 });
