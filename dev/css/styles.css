@@ -1,3 +1,13 @@
+html {
+  font-family: 'rawline', sans-serif;
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+.align-right {
+  text-align: right; }
+
 nav {
   display: flex;
   justify-content: space-between; }
@@ -13,8 +23,77 @@ nav ul {
 nav ul li {
   padding: 0.5em 0.5em; }
 
-td img {
-  width: 25px; }
+.container {
+  margin: 0 auto;
+  width: 900px; }
 
-td.align-right {
-  text-align: right; }
+.table {
+  width: 900px; }
+
+.table-row-header td {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(33, 33, 33, 0.7);
+  background-color: #d9e6fc;
+  padding: 10px 0 10px 0; }
+
+#thead-Cryptocurrency {
+  width: 45%;
+  padding-left: 80px;
+  cursor: pointer; }
+
+#thead-Marketcap {
+  width: 20%;
+  text-align: right;
+  padding-right: 20px;
+  cursor: pointer; }
+
+#thead-Price {
+  width: 10%;
+  text-align: right;
+  cursor: pointer; }
+
+#thead-Change {
+  width: 25%;
+  text-align: center;
+  position: relative;
+  pointer-events: none;
+  cursor: wait; }
+
+.loader {
+  display: inline-block;
+  position: absolute;
+  bottom: calc(50% - 8px);
+  margin-left: 5px; }
+
+tr {
+  border-bottom: 1px solid #d9e6fc; }
+
+td.index {
+  width: 50px;
+  text-align: center; }
+
+td img {
+  width: 30px; }
+
+td.short {
+  width: 40px; }
+
+td.long {
+  padding-left: 3px; }
+
+td.marketcap {
+  padding-right: 20px; }
+
+td.chart {
+  padding-left: 17px;
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
+td .canvasjs-chart-container {
+  overflow: hidden;
+  width: 150px;
+  height: 64px; }
+
+td.coinHist {
+  padding-right: 10px; }

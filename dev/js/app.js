@@ -5,8 +5,10 @@ let CRYPTOCOMPARE_IMG_URI = "https://www.cryptocompare.com";
 let app = new Vue({ /*global Vue*/ //from vue.js
   el: "#app",
   data: {
-    coins: {},
-    coinData: {}
+    coins: [],
+    coinData: {},
+    currentSort:'index',
+    currentSortDir:'asc'
   },
   methods: {
     
@@ -36,12 +38,13 @@ let app = new Vue({ /*global Vue*/ //from vue.js
           var coinShorts = [];
           for(var i in resp.data) {
             coinShorts.push(resp.data[i].short);
+            this.coins[i].index = 1+ parseInt(i, 10); //adding index variable to app._data.coins[i].index
               //an array is generated to list the top 20 coins' short names in market cap order.
               //e.g. coinShorts: ["BTC","ETH","XRP",...]
           }
           const getCoinHist = (short) => { //calls coincap API to generate a 7-day price history for a coin. Takes short name e.g. "BTC" as param.
             return new Promise((resolve, reject) => {
-              axios.get(`https://coincap.io/history/7day/${short}`)
+              axios.get(COINCAP_API_URI + `/history/7day/${short}`)
               .then(response => {
                 return resolve(response.data.price);
                   //so getCoinHist returns a 2-d array of Unix timestamps (in ms) and prices (in USD)
@@ -60,7 +63,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
           }
           //function to run the iterated axios.get - used to call coincap API to generate 20 cryptocurrencies' 7-day price histories
           const start = async() => {
-            console.log(this.coins);
+            //console.log(this.coins);
             await asyncForEach(this.coins, async (coin) => {
               await getCoinHist(coin.short).then((price) => {
                 var ind = ""; //variable for position of current coin in the top 20 list
@@ -68,7 +71,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
                 var len = price.length; //number of coins
                 var priceChange = (price[len-1][1] / price[0][1]) - 1;
                   //priceChange is a percentage price change across the last 7 days
-                this.coins[ind].coinHist = priceChange;
+                this.coins[ind].coinHist = priceChange * 100;
                   //stores the percentage price change in app._data.coins[index].coinHist
                 if (priceChange < 0) { //changes color of price history output on the page, green for price increase, red for price drop
                   this.coins[ind].color = 'red';
@@ -84,8 +87,11 @@ let app = new Vue({ /*global Vue*/ //from vue.js
             this.coins[0].shapeshift = "done";
             //can decide to only refresh page content here instead of within the start() function
             // this will cause vue to display all new page content at once, instead of one at a time.
+            document.getElementById("loader").style.display = "none"; //hides spinning loading icon once coinHist requests are completed          
+            document.getElementById("thead-Change").style.pointerEvents = "auto";
+            document.getElementById("thead-Change").style.cursor = "pointer";
           };
-          start();
+          start(); //comment out this line to stop the 20+ api calls to coincap for offline work
         })
         .catch((err) => {
           console.error(err);
@@ -101,10 +107,29 @@ let app = new Vue({ /*global Vue*/ //from vue.js
         console.log(err);
       }
     },
-    
+    sort: function(s) {
+      let self = this;
+      //if s == current sort, reverse
+      if (s === this.currentSort) {
+        this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+      }
+      this.currentSort = s;
+      //could add styling to thead elements here that adds sort indicators
+    }
   },
   created: function() {
     //on pageload, begin with an initial run of getCoinData, which will also run getCoins method and getCoinHist function
     this.getCoinData();
+  },
+  computed: {
+    sortedCoins: function() {
+      return this.coins.sort((a,b) => {
+        let direction = 1;
+        if (this.currentSortDir === 'desc') direction = -1;
+        if (a[this.currentSort] < b[this.currentSort]) return -1 * direction;
+        if (a[this.currentSort] > b[this.currentSort]) return 1 * direction;
+        return 0;
+      });
+    }
   }
 });

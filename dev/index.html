@@ -4,6 +4,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CoinTrends</title>
   
+  <link href="https://cdn.rawgit.com/h-ibaldo/Raleway_Fixed_Numerals/master/css/rawline.css" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
   <!--build:css assets/styles.min.css-->
   <link rel="stylesheet" href="css/minireset.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -21,42 +23,66 @@
     </ul>
   </nav>
 
-  <div id="app">
-    <table class="table">
-      <thead>
-        <tr>
-          <td>Rank</td>
-          <td>Short</td>
-          <td>Name</td>
-          <td>Market Cap (USD)</td>
-          <td>Price (USD)</td>
-          <td>7-Day Change</td>
-          <td>Graph (CanvasJS.com)</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-cloak v-for="(coin, index) in coins">
-          <td>{{ index+1 }}</td>
-          <td>{{ coin.short }}</td>
-          <td><img v-bind:src="getCoinImage(coin.short)">{{ coin.long }}</td>
-          <td class="align-right">{{ coin.mktcap | numeralFormat('($ 0.00a)') }}</td>
-          <td class="align-right">{{ coin.price | numeralFormat('$0,0.00') }}</td>
-          <td class="align-right" v-bind:style="{ color: coin.color,}">{{ coin.coinHist | numeralFormat('0.000') }}%</td>
-          <td>
-            <div style="height: 80px; width: 150px; margin-bottom: -16px; border: 1px solid black" v-bind:id="'chartContainer'+(index)"></div>
-            <!-- the above needs to iterate across ids-->
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
-  </div> <!-- app end -->
+  <section class="container">
+    <div id="app">
+      <table class="table">
+        <thead class="table-row-header">
+          <tr class="table-row-header">
+            <!--<td>Rank</td>-->
+            <!--<td>Short</td>-->
+            <td @click="sort('index')" id="thead-Cryptocurrency" colspan="4">Cryptocurrency</td>
+            <td @click="sort('mktcap')" id="thead-Marketcap">Market Cap (USD)</td>
+            <td @click="sort('price')" id="thead-Price">Price (USD)</td>
+            <td @click="sort('coinHist')" id="thead-Change" colspan="2">
+              7-Day Change
+              <div id="loader" class="loader" title="1">
+                <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                   width="16px" height="16px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                  <path fill="#fafafa" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                    <animateTransform attributeType="xml"
+                      attributeName="transform"
+                      type="rotate"
+                      from="0 25 25"
+                      to="360 25 25"
+                      dur="0.6s"
+                      repeatCount="indefinite"/>
+                  </path>
+                </svg>
+              </div>
+            </td>
+            <!--<td>Graph (CanvasJS)</td>-->
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-cloak v-for="(coin, index) in sortedCoins">
+            <td class="index">{{ coin.index }}</td>
+            <td class="short">{{ coin.short }}</td>
+            <td><img v-bind:src="getCoinImage(coin.short)"></td>
+            <td class="long">{{ coin.long }}</td>
+            <td class="marketcap align-right">{{ coin.mktcap | numeralFormat('($0.00 a)') }}</td>
+            <td class="price align-right">{{ coin.price | numeralFormat('$0,0.00') }}</td>
+            <td class="chart">
+              <div class="chartContainer" style="height: 80px; width: 150px; margin-bottom: -15px; border: 1px solid transparent" v-bind:id="'chartContainer'+(index)"></div>
+            </td>
+            <td class="coinHist align-right" v-bind:style="{ color: coin.color,}">{{ coin.coinHist | numeralFormat('+0.00') }}%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
+        debug: sort={{currentSort}}, dir={{currentSortDir}}
 
+    </div> <!-- Vue app end -->
+  </section>
+  
+
+  <footer>
+    
+  </footer>
+  
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script src="js/vue.js"></script>
   <script src="js/vue-numerals.min.js"></script>
-  <!--<script src="js/vue2-filters.min.js"></script>-->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/chart.js"></script>

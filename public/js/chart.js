@@ -1,13 +1,12 @@
 //work on this
 function makeChart(price, ind) {
-  console.log("chart is run");
-  console.log("chart price: "+price+"chartind: "+ind);
+  //console.log("chart is run");
+  //console.log("chart price: "+price+"chartind: "+ind);
   var dataPoints = [];
   var chart = new CanvasJS.Chart("chartContainer"+ind,{ /*global CanvasJS*/
     data: [{
       type: "line",
-      lineColor: "green", //function?
-      //lineColor: color,
+      lineColor: "green",
       dataPoints : dataPoints,
       highlightEnabled: false,
       mouseover: function() {

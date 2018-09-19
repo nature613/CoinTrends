@@ -1,26 +1,138 @@
 //hard-refresh the browsersync window before making changes
 //  to make sure the browser doesn't use cached css files
 
+//Fonts - try Lora for headings, and Roboto or Raleway/rawline for body
+  //font-family: 'Raleway', sans-serif;
+  //font-family: 'rawline', sans-serif;
+  //font-family: 'Roboto', sans-serif;
+  //font-family: 'Lora', serif;
+
+// // declarations // //
+$accent: #d9e6fc;
+// //              // //
+
+// // html, body and misc // //
+html {
+  font-family: 'rawline', sans-serif;
+  box-sizing: border-box;
+}
+body {
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+.align-right {
+  text-align: right;
+}
+// //                     // //
+
+
+// // navbar // //
 nav {
   display: flex;
   justify-content: space-between;
 }
-nav .brand {
-  padding: 0.5em 0.5em;
-}
-nav ul {
-  display: inline-flex;
-  padding: 0;
-  margin: 0;
-}
-nav ul li {
-  padding: 0.5em 0.5em;
-}
+nav {
+  .brand {
+    padding: 0.5em 0.5em;
+  }
+  ul {
+    display: inline-flex;
+    padding: 0;
+    margin: 0;
+  }
+  ul li {
+    padding: 0.5em 0.5em;
+  }
+} //end nav
+// //        // //
 
-td img {
-  width: 25px;
-}
 
-td.align-right {
+
+// // table // //
+
+.container {
+  margin: 0 auto;
+  width: 900px;
+}
+.table {
+  width: 900px;
+}
+.table-row-header td {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(33,33,33,0.7);
+  background-color: $accent;
+  padding: 10px 0 10px 0;
+}
+#thead-Cryptocurrency {
+  width: 45%;
+  padding-left: 80px;
+  cursor: pointer;
+}
+#thead-Marketcap {
+  width: 20%;
   text-align: right;
+  padding-right: 20px;
+  cursor: pointer;
 }
+#thead-Price {
+  width: 10%;
+  text-align: right;
+  cursor: pointer;
+}
+#thead-Change {
+  width: 25%;
+  text-align: center;
+  position: relative;
+  pointer-events: none; //this is temporary, until this column has finished loading it shouldn't be sorted.
+  cursor: wait;
+}
+.loader {
+  display: inline-block;
+  position: absolute;
+  bottom: calc(50% - 8px);
+  margin-left: 5px;
+}
+tr {
+ border-bottom: 1px solid $accent;
+}
+
+td {
+  //border: 1px solid red; background-color: rebeccapurple;
+}
+
+td {
+  &.index {
+    width: 50px;
+    text-align: center;
+  }
+  img {
+    width: 30px;
+  }
+  &.short {
+    width: 40px;
+  }
+  &.long {
+    padding-left: 3px;
+  }
+  &.marketcap {
+    padding-right: 20px;
+  }
+  &.price {
+  }
+  &.chart {
+    padding-left: 17px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .canvasjs-chart-container {
+    overflow: hidden;
+    width: 150px;
+    height: 64px;
+  }
+  &.coinHist {
+    padding-right: 10px;
+  }
+} //end td
+// //       // //

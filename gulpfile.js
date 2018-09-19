@@ -1,16 +1,18 @@
 // Summary of commands
 //  gulp watch:
-//    Initiate browser-sync,
+//    Initiate browser-sync (live-reload),
 //    Watch html/css/js files,
 //    Compile watched .scss files into .css files on save,
 //    Refresh browser-sync on saving watched files.
 //
 //  gulp build:
 //    Delete contents of public/ ready for rebuild,
-//    Compile all .scss files into .css files and copy .css into public/assets/,
-//    Concatenate and minify .css files and publish index.html into public/,
-//    Copy images from dev/assets/images/ into public/assets/images/.
-//    
+//    Compile all .scss files into .css files,
+//    Concatenate and minify .css files and copy into public/assets/,
+//    Publish index.html and other .html files into public/,
+//    Copy images from dev/assets/images/ into public/assets/images/,
+//    Copy .js files from dev/js into public/js.
+//
 
 // requires:
 var gulp = require('gulp');
@@ -22,7 +24,6 @@ var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
 var del = require('del');
 var runSequence = require('run-sequence');
-//var envify = require('envify/custom')
 //
 
 // // // 'gulp watch' tasks including preprocessing css // // // 
