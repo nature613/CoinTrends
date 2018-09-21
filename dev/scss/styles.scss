@@ -58,35 +58,33 @@ nav {
 .table {
   width: 900px;
 }
-.table-row-header td {
+.thead {
   font-family: 'Exo 2', sans-serif;
   font-size: 0.8rem;
   color: rgba(33,33,33,0.7);
   background-color: $accent;
   padding: 10px 0 10px 0;
+  position: relative;
+  pointer-events: none; //this is temporary, until this column has finished loading you can't click to sort.
+  cursor: wait;
 }
 #thead-Cryptocurrency {
   width: 45%;
   padding-left: 80px;
-  cursor: pointer;
 }
 #thead-Marketcap {
   width: 20%;
   text-align: right;
   padding-right: 20px;
-  cursor: pointer;
 }
 #thead-Price {
   width: 10%;
   text-align: right;
-  cursor: pointer;
+  padding-right: 20px;
 }
 #thead-Change {
   width: 25%;
   text-align: center;
-  position: relative;
-  pointer-events: none; //this is temporary, until this column has finished loading it shouldn't be sorted.
-  cursor: wait;
 }
 .loader {
   display: inline-block;
@@ -120,6 +118,7 @@ td {
     padding-right: 20px;
   }
   &.price {
+    padding-right: 20px;
   }
   &.chart {
     padding-left: 17px;

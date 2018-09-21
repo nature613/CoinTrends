@@ -30,35 +30,33 @@ nav ul li {
 .table {
   width: 900px; }
 
-.table-row-header td {
+.thead {
   font-family: 'Exo 2', sans-serif;
   font-size: 0.8rem;
   color: rgba(33, 33, 33, 0.7);
   background-color: #d9e6fc;
-  padding: 10px 0 10px 0; }
+  padding: 10px 0 10px 0;
+  position: relative;
+  pointer-events: none;
+  cursor: wait; }
 
 #thead-Cryptocurrency {
   width: 45%;
-  padding-left: 80px;
-  cursor: pointer; }
+  padding-left: 80px; }
 
 #thead-Marketcap {
   width: 20%;
   text-align: right;
-  padding-right: 20px;
-  cursor: pointer; }
+  padding-right: 20px; }
 
 #thead-Price {
   width: 10%;
   text-align: right;
-  cursor: pointer; }
+  padding-right: 20px; }
 
 #thead-Change {
   width: 25%;
-  text-align: center;
-  position: relative;
-  pointer-events: none;
-  cursor: wait; }
+  text-align: center; }
 
 .loader {
   display: inline-block;
@@ -83,6 +81,9 @@ td.long {
   padding-left: 3px; }
 
 td.marketcap {
+  padding-right: 20px; }
+
+td.price {
   padding-right: 20px; }
 
 td.chart {

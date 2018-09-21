@@ -8,7 +8,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
     coins: [],
     coinData: {},
     currentSort:'index',
-    currentSortDir:'asc'
+    currentSortDir:'desc'
   },
   methods: {
     
@@ -72,6 +72,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
                 var priceChange = (price[len-1][1] / price[0][1]) - 1;
                   //priceChange is a percentage price change across the last 7 days
                 this.coins[ind].coinHist = priceChange * 100;
+                this.coins[ind].fullPriceHist = price;
                   //stores the percentage price change in app._data.coins[index].coinHist
                 if (priceChange < 0) { //changes color of price history output on the page, green for price increase, red for price drop
                   this.coins[ind].color = 'red';
@@ -87,9 +88,18 @@ let app = new Vue({ /*global Vue*/ //from vue.js
             this.coins[0].shapeshift = "done";
             //can decide to only refresh page content here instead of within the start() function
             // this will cause vue to display all new page content at once, instead of one at a time.
-            document.getElementById("loader").style.display = "none"; //hides spinning loading icon once coinHist requests are completed          
-            document.getElementById("thead-Change").style.pointerEvents = "auto";
-            document.getElementById("thead-Change").style.cursor = "pointer";
+            var loaders = document.getElementsByClassName("loader");
+            for (var el = 0; el < loaders.length; el++) {
+              loaders[el].style.display = "none";
+            }
+            var headers = document.getElementsByClassName("thead");
+            for (var el = 0; el < headers.length; el++) {
+              headers[el].style.pointerEvents = "auto";
+              headers[el].style.cursor = "pointer";
+            }
+            //document.getElementById("loader").style.display = "none"; //hides spinning loading icon once coinHist requests are completed          
+            //document.getElementById("thead-Change").style.pointerEvents = "auto";
+            //document.getElementById("thead-Change").style.cursor = "pointer";
           };
           start(); //comment out this line to stop the 20+ api calls to coincap for offline work
         })
@@ -114,6 +124,13 @@ let app = new Vue({ /*global Vue*/ //from vue.js
         this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
       }
       this.currentSort = s;
+      for(var i = 0; i <= 19; i++) {
+          var sortedCoinPrice = this.sortedCoins[i].fullPriceHist;
+          //console.log("sortedCoinPrice: "+sortedCoinPrice);
+          makeChart(sortedCoinPrice,i);
+          //var testCoin = this.sortedCoins[i].index;
+          //console.log(testCoin);
+      }
       //could add styling to thead elements here that adds sort indicators
     }
   },
@@ -126,10 +143,12 @@ let app = new Vue({ /*global Vue*/ //from vue.js
       return this.coins.sort((a,b) => {
         let direction = 1;
         if (this.currentSortDir === 'desc') direction = -1;
+        if (this.currentSort === 'index' ) direction = -1 * direction;
         if (a[this.currentSort] < b[this.currentSort]) return -1 * direction;
         if (a[this.currentSort] > b[this.currentSort]) return 1 * direction;
         return 0;
       });
+      
     }
   }
 });
