@@ -86,16 +86,21 @@ let app = new Vue({ /*global Vue*/ //from vue.js
               });
             });
             this.coins[0].shapeshift = "done";
-            //can decide to only refresh page content here instead of within the start() function
-            // this will cause vue to display all new page content at once, instead of one at a time.
+              //can decide to only refresh page content here instead of within the start() function
+              // this will cause vue to display all new page content at once, instead of one at a time.
             var loaders = document.getElementsByClassName("loader");
-            for (var el = 0; el < loaders.length; el++) {
-              loaders[el].style.display = "none";
+            for (var j = 0; j < loaders.length; j++) {
+              loaders[j].style.display = "none";
             }
+            var carets = document.getElementsByClassName("caret");
+            for (var j = 0; j < carets.length; j++) {
+              carets[j].style.display = "inline-block";
+            }
+            document.getElementById("caret-fill-0").style.display = "inline-block";
             var headers = document.getElementsByClassName("thead");
-            for (var el = 0; el < headers.length; el++) {
-              headers[el].style.pointerEvents = "auto";
-              headers[el].style.cursor = "pointer";
+            for (var j = 0; j < headers.length; j++) {
+              headers[j].style.pointerEvents = "auto";
+              headers[j].style.cursor = "pointer";
             }
             //document.getElementById("loader").style.display = "none"; //hides spinning loading icon once coinHist requests are completed          
             //document.getElementById("thead-Change").style.pointerEvents = "auto";
@@ -122,14 +127,37 @@ let app = new Vue({ /*global Vue*/ //from vue.js
       //if s == current sort, reverse
       if (s === this.currentSort) {
         this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+        
+          var carets = document.querySelectorAll(".caret, .caret-fill");
+          console.log(carets);
+          for (var k = 0; k < carets.length; k++) {
+            carets[k].classList.toggle("rotated");
+            console.log("switch");
+          }
+        /**/ //if sort is flipping, then flip the carets
+      } else {
+        var sorts = ["index","mktcap","price","coinHist"]; //array of possible sorts
+        var sortIndex = sorts.indexOf(s);
+        var sortsOthers = sorts.slice();
+        sortsOthers.splice(sortIndex, 1);
+        document.getElementById("caret-fill-"+sortIndex).style.display = "inline-block";
+        ////document.getElementById("caret-"+sortIndex).style.display = "none";
+        for (var j = 0; j < sortsOthers.length; j++) {
+          var ref = sortsOthers[j];
+          var refIndex = sorts.indexOf(ref);
+          ////document.getElementById("caret-"+refIndex).style.display = "inline-block";
+          document.getElementById("caret-fill-"+refIndex).style.display = "none";
+        }
       }
       this.currentSort = s;
-      for(var i = 0; i <= 19; i++) {
+      for(var i = 0; i < this.coins.length; i++) {
+        console.log(this.coins.length);
           var sortedCoinPrice = this.sortedCoins[i].fullPriceHist;
           //console.log("sortedCoinPrice: "+sortedCoinPrice);
           makeChart(sortedCoinPrice,i);
           //var testCoin = this.sortedCoins[i].index;
           //console.log(testCoin);
+      //also add flipping for carets based on sort dir, and changing non-sorted columns back to non-filled
       }
       //could add styling to thead elements here that adds sort indicators
     }

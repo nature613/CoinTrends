@@ -29,25 +29,49 @@
             <td @click="sort('index')" id="thead-Cryptocurrency" class="thead" colspan="4">
               Cryptocurrency
               <div class="loader">
-                <object data="assets/images/loader.svg" type="image/svg+xml"></object>
+                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
+              </div>
+              <div id="caret-0" class="caret">
+                <img id="caret-0-obj" src="assets/images/caret.svg" type="image/svg+xml"></img>
+              </div>
+              <div id="caret-fill-0" class="caret-fill">
+                <img id="caret-fill-0-obj" src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
               </div>
             </td>
             <td @click="sort('mktcap')" id="thead-Marketcap" class="thead">
-              Market Cap (USD
+              Market Cap (USD)
               <div class="loader">
-                <object data="assets/images/loader.svg" type="image/svg+xml"></object>
+                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
               </div>
-            )</td>
+              <div id="caret-1" class="caret">
+                <img id="caret-1-obj" src="assets/images/caret.svg" type="image/svg+xml"></img>
+              </div>
+              <div id="caret-fill-1" class="caret-fill">
+                <img id="caret-fill-1-obj" src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
+              </div>
+            </td>
             <td @click="sort('price')" id="thead-Price" class="thead">
               Price (USD)
               <div class="loader">
-                <object data="assets/images/loader.svg" type="image/svg+xml"></object>
+                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
+              </div>
+              <div id="caret-2" class="caret">
+                <img src="assets/images/caret.svg" type="image/svg+xml"></img>
+              </div>
+              <div id="caret-fill-2" class="caret-fill">
+                <img src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
               </div>
             </td>
             <td @click="sort('coinHist')" id="thead-Change" class="thead" colspan="2">
               7-Day Change
-              <div id="loader" class="loader">
-                <object data="assets/images/loader.svg" type="image/svg+xml"></object>
+              <div class="loader">
+                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
+              </div>
+              <div id="caret-3" class="caret">
+                <img src="assets/images/caret.svg" type="image/svg+xml"></img>
+              </div>
+              <div id="caret-fill-3" class="caret-fill">
+                <img src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
               </div>
             </td>
             <!--<td>Graph (CanvasJS)</td>-->
@@ -70,10 +94,6 @@
       </table>
       <div v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
         debug: sort={{currentSort}}, dir={{currentSortDir}}
-              <div class="caret">
-                <object data="assets/images/caret.svg" type="image/svg+xml"></object>
-              </div>
-
     </div> <!-- Vue app end -->
   </section>
   

@@ -90,7 +90,7 @@ gulp.task('images', function(){
 gulp.task('scripts', function(){
   return gulp.src('dev/js/**/*')
     .pipe(gulp.dest('public/js'));
-})
+});
 
 // build - runs a sequence of gulp tasks to rebuild public/:
 //   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images and fonts to public/assets

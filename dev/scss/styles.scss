@@ -91,6 +91,34 @@ nav {
   position: absolute;
   bottom: calc(50% - 8px);
   margin-left: 5px;
+  height: 16px;
+  width: 16px;
+}
+.caret {
+  display: none;
+  position: absolute;
+  bottom: calc(50% - 10px);
+  margin-left: 5px;
+  //z-index: 2;
+  height: 14px;
+  width: 14px;
+  cursor: pointer;
+}
+.caret-fill {
+  display: none;
+  position: absolute;
+  bottom: calc(50% - 10px);
+  margin-left: 5px;
+  z-index: 2;
+  height: 14px;
+  width: 14px;
+  cursor: pointer;
+}
+.rotated {
+  transform: rotate(180deg);
+}
+.caret object {
+  pointer-events: none
 }
 tr {
  border-bottom: 1px solid $accent;
