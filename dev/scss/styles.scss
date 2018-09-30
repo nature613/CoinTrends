@@ -9,6 +9,7 @@
 
 // // declarations // //
 $accent: #d9e6fc;
+$textColor: #333333;
 // //              // //
 
 // // html, body and misc // //
@@ -17,12 +18,17 @@ html {
   box-sizing: border-box;
 }
 body {
+  color: $textColor;
+  position:relative;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 .align-right {
   text-align: right;
+}
+#counter-debug {
+  display: none;
 }
 // //                     // //
 
@@ -67,6 +73,7 @@ nav {
   position: relative;
   pointer-events: none; //this is temporary, until this column has finished loading you can't click to sort.
   cursor: wait;
+  user-select: none;
 }
 #thead-Cryptocurrency {
   width: 45%;
@@ -117,7 +124,7 @@ nav {
 .rotated {
   transform: rotate(180deg);
 }
-.caret object {
+.caret img {
   pointer-events: none
 }
 tr {
@@ -157,9 +164,68 @@ td {
     overflow: hidden;
     width: 150px;
     height: 64px;
+    pointer-events: none;
+  }
+  .canvasjs-chart-canvas {
+    pointer-events: none;
   }
   &.coinHist {
     padding-right: 10px;
   }
 } //end td
 // //       // //
+
+
+
+// // footer // //
+.footer-outer {
+  padding-top: 200px; //more than footer-height
+}
+.footer-inner {
+  background-color: #f1f1f1;
+  color: #4a4a4a;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 5px;
+  //clear:both;
+}
+.footer-inner-left {
+  width: 25%;
+  float: left;
+  padding-top: 65px;
+  text-align: center;
+}
+.footer-inner-right {
+  width: 200px;
+  //float: right;
+  margin: 0 auto;
+  //display: flex;
+}
+.footer-resources-title {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+.footer-resources {
+  display: grid;
+}
+.footer-resources div {
+  padding-bottom: 10px;
+}
+.footer-resources div a {
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+.footer-resources-img {
+  height: 2rem;
+}
+.footer-resources-text {
+  vertical-align: middle;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+// //        // //

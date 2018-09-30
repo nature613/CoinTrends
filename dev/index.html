@@ -33,49 +33,49 @@
             <td @click="sort('index')" id="thead-Cryptocurrency" class="thead" colspan="4">
               Cryptocurrency
               <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
+                <img src="assets/images/loader.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-0" class="caret">
-                <img id="caret-0-obj" src="assets/images/caret.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-fill-0" class="caret-fill">
-                <img id="caret-fill-0-obj" src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
             <td @click="sort('mktcap')" id="thead-Marketcap" class="thead">
               Market Cap (USD)
               <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
+                <img src="assets/images/loader.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-1" class="caret">
-                <img id="caret-1-obj" src="assets/images/caret.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-fill-1" class="caret-fill">
-                <img id="caret-fill-1-obj" src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
             <td @click="sort('price')" id="thead-Price" class="thead">
               Price (USD)
               <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
+                <img src="assets/images/loader.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-2" class="caret">
-                <img src="assets/images/caret.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-fill-2" class="caret-fill">
-                <img src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
             <td @click="sort('coinHist')" id="thead-Change" class="thead" colspan="2">
               7-Day Change
               <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"></img>
+                <img src="assets/images/loader.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-3" class="caret">
-                <img src="assets/images/caret.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret.svg" type="image/svg+xml"/>
               </div>
               <div id="caret-fill-3" class="caret-fill">
-                <img src="assets/images/caret-fill.svg" type="image/svg+xml"></img>
+                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
             <!--<td>Graph (CanvasJS)</td>-->
@@ -96,21 +96,41 @@
           </tr>
         </tbody>
       </table>
-      <div v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
-        debug: sort={{currentSort}}, dir={{currentSortDir}}
+      <div id="counter-debug" v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
+      <!-- debug counter must remain in index.html for now -->
     </div> <!-- Vue app end -->
   </section>
   
 
-  <footer>
-    
+  <footer class="footer-outer">
+    <div class="footer-inner">
+      <div class="footer-inner-left">
+        <a href="https://oliverdavies.me/" title="Oliver Davies Portfolio" target="_blank">oliverdavies.me</a>
+        <div>&copy; Oliver Davies 2018</div>
+      </div>
+      <div class="footer-inner-right">
+        <h5 class="footer-resources-title">Resources</h5>
+        <div class="footer-resources">
+          <div>
+            <a href="https://canvasjs.com/" target="_blank"><img class="footer-resources-img" src="assets/images/canvasjs-logo.svg"/><span class="footer-resources-text">CanvasJS</span></a> 
+          </div>
+          <div>
+            <a href="https://github.com/CoinCapDev/CoinCap.io" target="_blank"><img class="footer-resources-img" src="assets/images/coincap.png"/><span class="footer-resources-text">CoinCap API v1</span></a>
+          </div>
+          <div>
+            <a href="https://www.cryptocompare.com/api/" target="_blank"><img class="footer-resources-img" src="assets/images/cryptocompare.png"/><span class="footer-resources-text">CryptoCompare API</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
   
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <script src="js/canvasjs.min.js"></script>
   <script src="js/vue.js"></script>
   <script src="js/vue-numerals.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+  <script src="js/axios.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/chart.js"></script>
 

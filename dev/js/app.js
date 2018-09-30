@@ -18,7 +18,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
         .then((resp) => {
           this.coinData = resp.data.Data;
           //from CryptoCompare API, app._data.coinData is populated with a list of almost all popular cryptocurrencies, and some information about them
-          // we use this for their logo image links, now stored at app._data.coinData[index].ImageUrl
+          // I use this for their logo image links, now stored at app._data.coinData[index].ImageUrl
           this.getCoins();
            //calling this.getCoins to generate the top 20 list of cryptocurrencies and parse their price history
         })
@@ -47,7 +47,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
               axios.get(COINCAP_API_URI + `/history/7day/${short}`)
               .then(response => {
                 return resolve(response.data.price);
-                  //so getCoinHist returns a 2-d array of Unix timestamps (in ms) and prices (in USD)
+                  //getCoinHist returns a 2-d array of Unix timestamps (in ms) and prices (in USD)
                   // e.g. price: [[1536405714000,7568.12],[1536406714000,7700.54],...]
               })
               .catch(error => {
@@ -102,9 +102,6 @@ let app = new Vue({ /*global Vue*/ //from vue.js
               headers[j].style.pointerEvents = "auto";
               headers[j].style.cursor = "pointer";
             }
-            //document.getElementById("loader").style.display = "none"; //hides spinning loading icon once coinHist requests are completed          
-            //document.getElementById("thead-Change").style.pointerEvents = "auto";
-            //document.getElementById("thead-Change").style.cursor = "pointer";
           };
           start(); //comment out this line to stop the 20+ api calls to coincap for offline work
         })
@@ -114,10 +111,10 @@ let app = new Vue({ /*global Vue*/ //from vue.js
     },
     
     getCoinImage: function(short) {
-      short = (short === "VEN" ? "VET" : short); //VeChain logo workaround while there's confusion about the new VeChain fork
+      short = (short === "VEN" ? "VET" : short); //VeChain logo workaround while there's confusion about how to handle the new VeChain fork
       try {
         return CRYPTOCOMPARE_IMG_URI + this.coinData[short].ImageUrl;
-          //Vue calls this to display cryptocurrency logos, from CryptoCompare API data stored in app._data.coinData
+          //call this to return cryptocurrency logos, from CryptoCompare API data stored in app._data.coinData
       } catch(err) {
         console.log(err);
       }
@@ -129,12 +126,9 @@ let app = new Vue({ /*global Vue*/ //from vue.js
         this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
         
           var carets = document.querySelectorAll(".caret, .caret-fill");
-          console.log(carets);
           for (var k = 0; k < carets.length; k++) {
             carets[k].classList.toggle("rotated");
-            console.log("switch");
           }
-        /**/ //if sort is flipping, then flip the carets
       } else {
         var sorts = ["index","mktcap","price","coinHist"]; //array of possible sorts
         var sortIndex = sorts.indexOf(s);
@@ -151,7 +145,6 @@ let app = new Vue({ /*global Vue*/ //from vue.js
       }
       this.currentSort = s;
       for(var i = 0; i < this.coins.length; i++) {
-        console.log(this.coins.length);
           var sortedCoinPrice = this.sortedCoins[i].fullPriceHist;
           //console.log("sortedCoinPrice: "+sortedCoinPrice);
           makeChart(sortedCoinPrice,i);

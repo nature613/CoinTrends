@@ -13,7 +13,7 @@ function makeChart(price, ind) {
         return;
       }
     }],
-    zoomEnabled: true,
+    zoomEnabled: false,
     animationEnabled: true,
     toolTip:{
       enabled: false
