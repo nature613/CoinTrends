@@ -30,7 +30,7 @@
           <tr class="table-row-header">
             <!--<td>Rank</td>-->
             <!--<td>Short</td>-->
-            <td @click="sort('index')" id="thead-Cryptocurrency" class="thead" colspan="4">
+            <td @click="sort('index')" id="header-Cryptocurrency" class="header" colspan="4">
               Cryptocurrency
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -42,7 +42,7 @@
                 <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
-            <td @click="sort('mktcap')" id="thead-Marketcap" class="thead">
+            <td @click="sort('mktcap')" id="header-Marketcap" class="header">
               Market Cap (USD)
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -54,7 +54,7 @@
                 <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
-            <td @click="sort('price')" id="thead-Price" class="thead">
+            <td @click="sort('price')" id="header-Price" class="header">
               Price (USD)
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -66,7 +66,7 @@
                 <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
-            <td @click="sort('coinHist')" id="thead-Change" class="thead" colspan="2">
+            <td @click="sort('coinHist')" id="header-Change" class="header" colspan="2">
               7-Day Change
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -125,15 +125,17 @@
     </div>
   </footer>
   
-
+  
+  
+  <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+  <!--build:js assets/scripts.min.js-->
   <script src="js/canvasjs.min.js"></script>
   <script src="js/vue.js"></script>
   <script src="js/vue-numerals.min.js"></script>
-  <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
   <script src="js/axios.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/chart.js"></script>
-
+  <!--endbuild-->
 
 </body>
 </html>

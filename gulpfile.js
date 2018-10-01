@@ -9,9 +9,9 @@
 //    Delete contents of public/ ready for rebuild,
 //    Compile all .scss files into .css files,
 //    Concatenate and minify .css files and copy into public/assets/,
+//    Concatenate and minify .js files and copy into public/assets/,
 //    Publish index.html and other .html files into public/,
-//    Copy images from dev/assets/images/ into public/assets/images/,
-//    Copy .js files from dev/js into public/js.
+//    Copy images from dev/assets/images/ into public/assets/images/.
 //
 
 // requires:
@@ -25,6 +25,7 @@ var cssnano = require('gulp-cssnano');
 var del = require('del');
 var runSequence = require('run-sequence');
 //
+
 
 // // // 'gulp watch' tasks including preprocessing css // // // 
 
@@ -73,13 +74,13 @@ gulp.task('clear:public', function() {
 gulp.task('useref', function(){
   return gulp.src('dev/*.html')
     .pipe(useref())
-    //.pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('public'));
 });
 
 // images - copies images from dev/images/ to public/images/
-//   separate from gulp fonts, in case I want to replace this with imagemin in the future, to compress images.
+//   separate function in case I need to replace this with imagemin in the future, to compress images.
 //   currently not planning on having any large images in this project, though.
 gulp.task('images', function(){
   return gulp.src('dev/assets/images/*')
@@ -93,7 +94,7 @@ gulp.task('scripts', function(){
 });
 
 // build - runs a sequence of gulp tasks to rebuild public/:
-//   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images and fonts to public/assets
+//   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images to public/assets
 gulp.task('build', function (callback) {
   runSequence('clear:public',
     ['sass', 'scripts', 'useref', 'images'],

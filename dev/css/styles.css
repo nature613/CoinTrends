@@ -20,7 +20,8 @@ nav {
   justify-content: space-between; }
 
 nav .brand {
-  padding: 0.5em 0.5em; }
+  padding: 0.5rem 0.5rem;
+  font-size: 2rem; }
 
 nav ul {
   display: inline-flex;
@@ -37,7 +38,7 @@ nav ul li {
 .table {
   width: 900px; }
 
-.thead {
+.header {
   font-family: 'Exo 2', sans-serif;
   font-size: 0.8rem;
   color: rgba(33, 33, 33, 0.7);
@@ -46,23 +47,29 @@ nav ul li {
   position: relative;
   pointer-events: none;
   cursor: wait;
-  user-select: none; }
+  user-select: none;
+  position: sticky;
+  top: 0px;
+  z-index: 5; }
 
-#thead-Cryptocurrency {
+.table-row-header {
+  border: none; }
+
+#header-Cryptocurrency {
   width: 45%;
   padding-left: 80px; }
 
-#thead-Marketcap {
+#header-Marketcap {
   width: 20%;
   text-align: right;
   padding-right: 20px; }
 
-#thead-Price {
+#header-Price {
   width: 10%;
   text-align: right;
   padding-right: 20px; }
 
-#thead-Change {
+#header-Change {
   width: 25%;
   text-align: center; }
 
@@ -162,6 +169,7 @@ td.coinHist {
   margin: 0 auto; }
 
 .footer-resources-title {
+  font-size: 1.25rem;
   padding-top: 15px;
   padding-bottom: 15px;
   text-align: center; }

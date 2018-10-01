@@ -97,7 +97,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
               carets[j].style.display = "inline-block";
             }
             document.getElementById("caret-fill-0").style.display = "inline-block";
-            var headers = document.getElementsByClassName("thead");
+            var headers = document.getElementsByClassName("header");
             for (var j = 0; j < headers.length; j++) {
               headers[j].style.pointerEvents = "auto";
               headers[j].style.cursor = "pointer";
@@ -152,7 +152,6 @@ let app = new Vue({ /*global Vue*/ //from vue.js
           //console.log(testCoin);
       //also add flipping for carets based on sort dir, and changing non-sorted columns back to non-filled
       }
-      //could add styling to thead elements here that adds sort indicators
     }
   },
   created: function() {
