@@ -1,7 +1,7 @@
 // Summary of commands
 //  gulp watch:
 //    Initiate browser-sync (live-reload),
-//    Watch html/css/js files,
+//    Watch html/scss/css/js files,
 //    Compile watched .scss files into .css files on save,
 //    Refresh browser-sync on saving watched files.
 //
@@ -87,11 +87,6 @@ gulp.task('images', function(){
     .pipe(gulp.dest('public/assets/images'));
 });
 
-// scripts - copies .js files from dev/js/ to public/js/
-gulp.task('scripts', function(){
-  return gulp.src('dev/js/**/*')
-    .pipe(gulp.dest('public/js'));
-});
 
 // build - runs a sequence of gulp tasks to rebuild public/:
 //   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images to public/assets
