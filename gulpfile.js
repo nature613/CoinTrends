@@ -92,7 +92,7 @@ gulp.task('images', function(){
 //   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images to public/assets
 gulp.task('build', function (callback) {
   runSequence('clear:public',
-    ['sass', 'scripts', 'useref', 'images'],
+    ['sass', 'useref', 'images'],
     callback
   );
 });
