@@ -38,18 +38,43 @@ body {
 #counter-debug {
   display: none;
 }
+a {
+  text-decoration: none;
+  //font-weight: 600;
+  color: #545454;
+}
+a:hover {
+  text-decoration: underline;
+}
 // //                     // //
 
 
 // // navbar // //
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 nav {
   .brand {
-    padding: 0.5rem 0.5rem;
+    //width: 300px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .brand-image {
+    padding: 1rem 1rem;
+    height: 4rem;
     font-size: 2rem;
+    padding-right: 0;
+  }
+  .brand-title {
+    padding: 0.5rem 0.5rem;
+    padding-left: 0.35rem;
+    font-size: 2rem;
+  }
+  .brand-image img {
+    display: block;
+    height: 2rem;
+    margin: auto;
   }
   ul {
     display: inline-flex;
@@ -284,6 +309,9 @@ td {
   float: left;
   padding-top: 65px;
   text-align: center;
+}
+#portfolio {
+  font-weight: 600;
 }
 .footer-inner-right {
   width: 200px;
