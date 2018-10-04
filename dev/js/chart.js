@@ -1,7 +1,4 @@
-//work on this
 function makeChart(price, ind) {
-  //console.log("chart is run");
-  //console.log("chart price: "+price+"chartind: "+ind);
   var dataPoints = [];
   var chart = new CanvasJS.Chart("chartContainer"+ind,{ /*global CanvasJS*/
     data: [{
@@ -23,7 +20,9 @@ function makeChart(price, ind) {
       tickLength: 0,
       labelFormatter: function(){
         return " ";
-      }
+      },
+      //
+      //lineThickness: 0,
     },
     axisY: {
       includeZero: false,
@@ -31,6 +30,11 @@ function makeChart(price, ind) {
       lineThickness: 0,
       gridThickness: 0,
       prefix: "$",
+      //
+      //tickThickness: 0,
+      //labelFormatter: function(){
+      //  return " ";
+      //}
     },
   });
   //var color = "";

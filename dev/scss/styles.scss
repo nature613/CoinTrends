@@ -10,12 +10,20 @@
 // // declarations // //
 $accent: #d9e6fc;
 $textColor: #333333;
+$breakpoint-large: 899px;
+$breakpoint-med: 709px;
 // //              // //
 
 // // html, body and misc // //
 html {
   font-family: 'rawline', sans-serif;
+  font-size: 16px;
   box-sizing: border-box;
+}
+@media (max-width: $breakpoint-med) {
+ html {
+   font-size: 12px;
+ }
 }
 body {
   color: $textColor;
@@ -65,6 +73,14 @@ nav {
 .table {
   width: 900px;
 }
+@media (max-width: $breakpoint-large) {
+  .container {
+    width: 100vw;
+  }
+  .table {
+    width: 100vw;
+  }
+}
 .header {
   font-family: 'Exo 2', sans-serif;
   font-size: 0.8rem;
@@ -72,7 +88,7 @@ nav {
   background-color: $accent;
   padding: 10px 0 10px 0;
   position: relative;
-  pointer-events: none; //this is temporary, until this column has finished loading you can't click to sort.
+  pointer-events: none; //until this column has finished loading you can't click headers to sort.
   cursor: wait;
   user-select: none;
   position: sticky;
@@ -128,6 +144,11 @@ nav {
   width: 14px;
   cursor: pointer;
 }
+@media (max-width: $breakpoint-med) {
+  .caret, .caret-fill {
+    margin-left: 2px;
+  }
+}
 .rotated {
   transform: rotate(180deg);
 }
@@ -139,7 +160,7 @@ tr {
 }
 
 td {
-  //border: 1px solid red; background-color: rebeccapurple;
+  font-size: 1rem;
 }
 
 td {
@@ -147,11 +168,15 @@ td {
     width: 50px;
     text-align: center;
   }
-  img {
+  img.coin-image {
     width: 30px;
+    min-width: 30px;
   }
   &.short {
     width: 40px;
+  }
+  &.short-placeholder {
+    display: none;
   }
   &.long {
     padding-left: 3px;
@@ -167,6 +192,10 @@ td {
     padding-top: 5px;
     padding-bottom: 5px;
   }
+  .chart-container {
+    height: 80px;
+    width: 150px;
+  }
   .canvasjs-chart-container {
     overflow: hidden;
     width: 150px;
@@ -180,6 +209,57 @@ td {
     padding-right: 10px;
   }
 } //end td
+@media (max-width: $breakpoint-med) {
+  #header-Cryptocurrency {
+    text-align: center;
+    padding-left: 0px;
+  }
+  #header-Marketcap {
+    display: none;
+  }
+  #header-Price {
+    padding-right: 15px;
+  }
+  td.index {
+    width: 40px;
+  }
+  td img.coin-image {
+    margin: 0 5px 0 0;
+    width: 20px;
+    min-width: 20px;
+  }
+  td.short {
+    display: none;
+  }
+  td.short-placeholder {
+    display: table-cell;
+  }
+  td.price {
+    padding-right: 15px;
+  }
+  td.marketcap {
+    display: none;
+  }
+  td.chart {
+    padding-left: 0px;
+  }
+  .canvasjs-chart-canvas {
+    width: 110px;
+    //height: 39px;
+  }
+  td .canvasjs-chart-container {
+    width: 96px;
+    height: 64px;
+  }
+  td .chart-container {
+    //height: 41px; //need to re-do the html to remove the element-level specificity that is stopping this from working
+    width: 110px;
+    //width: 50px;
+  }
+  td.coinHist {
+    padding-right: 3px;
+  }
+}
 // //       // //
 
 
@@ -219,6 +299,7 @@ td {
 }
 .footer-resources {
   display: grid;
+  width: 200px;
 }
 .footer-resources div {
   padding-bottom: 10px;
@@ -226,7 +307,6 @@ td {
 .footer-resources div a {
   display: flex;
   align-items: center;
-  width: 300px;
 }
 .footer-resources-img {
   height: 2rem;
@@ -236,4 +316,28 @@ td {
   padding-left: 10px;
   padding-bottom: 5px;
 }
+@media (max-width: $breakpoint-med) {
+  .footer-outer {
+    padding-top: 234px;
+  }
+  .footer-inner {
+    display: grid;
+  }
+  .footer-inner-left {
+    order: 2;
+    padding: 15px 0;
+    margin: 0 auto;
+    width: 200px;
+    border-top: 1px solid #b2b2b2;
+  }
+  .footer-inner-right {
+    order: 1;
+    width: 150px;
+  }
+  .footer-resources {
+    width: 150px;
+  }
+}
+//put grid on footer-inner
+// put order: 2 on inner-left, order: 1 on inner-right
 // //        // //
