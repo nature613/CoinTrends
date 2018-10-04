@@ -10,8 +10,9 @@
 // // declarations // //
 $accent: #d9e6fc;
 $textColor: #333333;
-$breakpoint-large: 899px;
+$breakpoint-large: 919px;
 $breakpoint-med: 709px;
+$breakpoint-small: 526px;
 // //              // //
 
 // // html, body and misc // //
@@ -21,6 +22,11 @@ html {
   box-sizing: border-box;
 }
 @media (max-width: $breakpoint-med) {
+ html {
+   font-size: 14px;
+ }
+}
+@media (max-width: $breakpoint-small) {
  html {
    font-size: 12px;
  }
@@ -97,13 +103,14 @@ nav {
 }
 .table {
   width: 900px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
 }
 @media (max-width: $breakpoint-large) {
   .container {
-    width: 100vw;
+    width: 100%;
   }
   .table {
-    width: 100vw;
+    width: 100%;
   }
 }
 .header {
@@ -244,13 +251,17 @@ td {
   }
   #header-Price {
     padding-right: 15px;
+    width: 20%;
+  }
+  #header-Change {
+    width: 35%;
   }
   td.index {
     width: 40px;
   }
   td img.coin-image {
     margin: 0 5px 0 0;
-    width: 20px;
+    width: 30px;
     min-width: 20px;
   }
   td.short {
@@ -279,10 +290,16 @@ td {
   td .chart-container {
     //height: 41px; //need to re-do the html to remove the element-level specificity that is stopping this from working
     width: 110px;
-    //width: 50px;
+    margin: 0 auto -15px auto;
   }
   td.coinHist {
     padding-right: 3px;
+    text-align: center;
+  }
+}
+@media (max-width: $breakpoint-small) {
+  td .img.coin-image {
+    width: 20px;
   }
 }
 // //       // //
@@ -346,7 +363,7 @@ td {
 }
 @media (max-width: $breakpoint-med) {
   .footer-outer {
-    padding-top: 234px;
+    padding-top: 259px;
   }
   .footer-inner {
     display: grid;
@@ -364,6 +381,11 @@ td {
   }
   .footer-resources {
     width: 150px;
+  }
+}
+@media (max-width: $breakpoint-small) {
+  .footer-outer {
+    padding-top: 225px;
   }
 }
 //put grid on footer-inner

@@ -5,6 +5,10 @@ html {
 
 @media (max-width: 709px) {
   html {
+    font-size: 14px; } }
+
+@media (max-width: 526px) {
+  html {
     font-size: 12px; } }
 
 body {
@@ -64,13 +68,14 @@ nav ul li {
   width: 900px; }
 
 .table {
-  width: 900px; }
+  width: 900px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); }
 
-@media (max-width: 899px) {
+@media (max-width: 919px) {
   .container {
-    width: 100vw; }
+    width: 100%; }
   .table {
-    width: 100vw; } }
+    width: 100%; } }
 
 .header {
   font-family: 'Exo 2', sans-serif;
@@ -201,12 +206,15 @@ td.coinHist {
   #header-Marketcap {
     display: none; }
   #header-Price {
-    padding-right: 15px; }
+    padding-right: 15px;
+    width: 20%; }
+  #header-Change {
+    width: 35%; }
   td.index {
     width: 40px; }
   td img.coin-image {
     margin: 0 5px 0 0;
-    width: 20px;
+    width: 30px;
     min-width: 20px; }
   td.short {
     display: none; }
@@ -224,9 +232,15 @@ td.coinHist {
     width: 96px;
     height: 64px; }
   td .chart-container {
-    width: 110px; }
+    width: 110px;
+    margin: 0 auto -15px auto; }
   td.coinHist {
-    padding-right: 3px; } }
+    padding-right: 3px;
+    text-align: center; } }
+
+@media (max-width: 526px) {
+  td .img.coin-image {
+    width: 20px; } }
 
 .footer-outer {
   padding-top: 200px; }
@@ -281,7 +295,7 @@ td.coinHist {
 
 @media (max-width: 709px) {
   .footer-outer {
-    padding-top: 234px; }
+    padding-top: 259px; }
   .footer-inner {
     display: grid; }
   .footer-inner-left {
@@ -295,3 +309,7 @@ td.coinHist {
     width: 150px; }
   .footer-resources {
     width: 150px; } }
+
+@media (max-width: 526px) {
+  .footer-outer {
+    padding-top: 225px; } }
