@@ -3,7 +3,7 @@
 
 A Front-End Web Development Project built with Vue.js, Sass, CoinCap/CryptoCompare APIs, and with 
 a Gulp build process. It shows live cryptocurrency prices in a table which is sortable thanks to Vue's 
-[computed properties](https://github.com/oliver-0/CoinTrends#key-features "Key Features | CoinTrends Readme on GitHub").
+[computed properties](#key-features "Key Features").
 
 ## Getting started
 
