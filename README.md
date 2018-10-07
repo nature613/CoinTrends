@@ -7,17 +7,14 @@ a Gulp build process. It shows live cryptocurrency prices in a table which is so
 
 ## Getting started
 
-Clone the project from github and with the [Node Package Manager (npm)](https://docs.npmjs.com/ "npm Documentation") installed, 
-install the project's dependencies:
+Clone the project from github and with your chosen package manager 
+(e.g. [npm](https://docs.npmjs.com/ "npm Documentation")), install the project's dependencies:
 
 ```shell
 git clone https://github.com/oliver-0/CoinTrends.git
 cd CoinTrends/
 npm install
 ``` 
-
-This will create a /node_modules/ folder in the project directory containing all of the dependencies 
-needed to work on the project.
 
 ## Developing
 
