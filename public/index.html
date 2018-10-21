@@ -88,8 +88,8 @@
             <td><img class="coin-image" v-bind:src="getCoinImage(coin.short)"></td>
             <td class="long">{{ coin.long }}</td>
             <td class="marketcap align-right">{{ coin.mktcap | numeralFormat('($0.00 a)') }}</td>
-            <td v-if="coin.price < 0.010" class="price align-right">{{ coin.price | numeralFormat('$0,0.0000') }}</td>
-            <td v-if="coin.price < 0.500 && coin.price >= 0.010" class="price align-right">{{ coin.price | numeralFormat('$0,0.000') }}</td>
+            <td v-if="coin.price < 0.020" class="price align-right">{{ coin.price | numeralFormat('$0,0.0000') }}</td>
+            <td v-if="coin.price < 0.500 && coin.price >= 0.020" class="price align-right">{{ coin.price | numeralFormat('$0,0.000') }}</td>
             <td v-if="coin.price >= 0.500"class="price align-right">{{ coin.price | numeralFormat('$0,0.00') }}</td>
             <td class="chart">
               <div class="chart-container" style="margin-bottom: -15px; border: 1px solid transparent" v-bind:id="'chartContainer'+(index)"></div>
