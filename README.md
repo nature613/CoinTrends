@@ -1,4 +1,4 @@
-# [CoinTrends](cointrends.site "cointrends.site")
+# [CoinTrends](https://cointrends.site "cointrends.site")
 > A Cryptocurrency ranking website with 7-day price histories
 
 A Front-End Web Development Project built with Vue.js, Sass, CoinCap/CryptoCompare APIs, and with 
