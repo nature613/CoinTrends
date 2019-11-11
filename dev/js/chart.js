@@ -1,4 +1,4 @@
-function makeChart(price, ind) {
+function makeChart(data, ind) {
   var dataPoints = [];
   var chart = new CanvasJS.Chart("chartContainer"+ind,{ /*global CanvasJS*/
     data: [{
@@ -51,13 +51,13 @@ function makeChart(price, ind) {
       });        
     chart.render();
   });*/
-  for (var i = 0; i < price.length; i++) {
+  for (var i = data.length - 169; i < data.length; i++) {
     var skipper = 1; //can change this value to skip data points in the array. 
       //Higher number means show less data points on chart, but it's a bit rough. Only use for testing.
     if(i % skipper === 0) { 
       //price is coming in as a 2-d array - first entry is a unix timestamp in ms, 2nd entry is coin price in USD
       var color = "";
-      var len = price.length;
+      var len = data.length;
       /*if (i === price.length - 1) { //was a function to color individual data points based on upward or downward swing..
         color = "green";
       } else if (price[i][1] <= price[i+1][1]) {
@@ -65,14 +65,14 @@ function makeChart(price, ind) {
       } else {
         color = "red";
       }*/
-      if (price[len-1][1] > price[0][1]) {
+      if (parseFloat(data[len-1].priceUsd) > parseFloat(data[len-169].priceUsd)) {
         color = "green";
       } else {
         color = "red";
       }
       dataPoints.push({
-        x: price[i][0], 
-        y: price[i][1],
+        x: data[i].time, 
+        y: parseFloat(data[i].priceUsd),
         lineColor: color,
         color: color
       });
