@@ -22,8 +22,9 @@ var useref = require('gulp-useref');
 var uglify = require('gulp-uglify-es').default;
 var gulpIf = require('gulp-if');
 var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
 var del = require('del');
-var runSequence = require('run-sequence');
 //
 
 
@@ -65,17 +66,22 @@ gulp.task('watch', gulp.series(['browserSync', 'sass'], function(){
 // // also depends on 'gulp sass', from gulp watch section above
 
 // clear:public - deletes everything in public/ directory, to clean up unused files before public/ can be rebuilt
-gulp.task('clear:public', function() {
-  return del.sync(['public/**/*', 'public/js/**', '!public']); //must ignore parent directory if you don't want it to be deleted too
+gulp.task('clear:public', function(done) {
+  del.sync(['public/**/*', 'public/js/**', '!public']); //must ignore parent directory if you don't want it to be deleted too
+  done();
 });
 
 // useref - copies html files from dev/ to public/,
 //   also concatenates and minifies .css and .js files, and places resulting files in public/assets/
 gulp.task('useref', function(){
+  var plugins = [
+      autoprefixer(),
+      cssnano()
+  ];
   return gulp.src('dev/*.html')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulpIf('*.css', postcss()))
+    .pipe(gulpIf('*.css', postcss(plugins)))
     .pipe(gulp.dest('public'));
 });
 
@@ -90,11 +96,8 @@ gulp.task('images', function(){
 
 // build - runs a sequence of gulp tasks to rebuild public/:
 //   Compile sass, copy html to public/ & concatenate/minify .css/.js, copy images to public/assets
-gulp.task('build', function (callback) {
-  runSequence('clear:public',
-    ['sass', 'useref', 'images'],
-    callback
-  );
-});
+gulp.task('build', gulp.series('clear:public',
+  gulp.parallel('sass', 'useref', 'images')
+));
 
 // // //                                                                       // // //
