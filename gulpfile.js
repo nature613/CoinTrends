@@ -21,7 +21,7 @@ var browserSync = require('browser-sync').create();
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify-es').default;
 var gulpIf = require('gulp-if');
-var cssnano = require('gulp-cssnano');
+var postcss = require('gulp-postcss');
 var del = require('del');
 var runSequence = require('run-sequence');
 //
@@ -75,7 +75,7 @@ gulp.task('useref', function(){
   return gulp.src('dev/*.html')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulpIf('*.css', postcss()))
     .pipe(gulp.dest('public'));
 });
 
