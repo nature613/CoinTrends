@@ -51,11 +51,11 @@ gulp.task('sass', function(){
 
 // watch - watches html/css/js files in dev/**/*, and reloads browserSync when any watched file is saved
 //   when a watched scss file is saved, all scss files are compiled into css files
-gulp.task('watch', ['browserSync', 'sass'], function(){
+gulp.task('watch', gulp.series(['browserSync', 'sass'], function(){
   gulp.watch('dev/scss/**/*.scss', ['sass']);
   gulp.watch('dev/*.html', browserSync.reload);
   gulp.watch('dev/js/**/*.js', browserSync.reload);
-});
+}));
 
 // // //                                              // // //
 
