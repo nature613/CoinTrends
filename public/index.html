@@ -39,7 +39,7 @@
                 <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
-            <td @click="sort('mktcap')" id="header-Marketcap" class="header">
+            <td @click="sort('marketCapUsd')" id="header-Marketcap" class="header">
               Market Cap (USD)
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -51,7 +51,7 @@
                 <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
-            <td @click="sort('price')" id="header-Price" class="header">
+            <td @click="sort('priceUsd')" id="header-Price" class="header">
               Price (USD)
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -80,14 +80,14 @@
         <tbody>
           <tr v-cloak v-for="(coin, index) in sortedCoins">
             <td class="index">{{ coin.index }}</td>
-            <td class="short">{{ coin.short }}</td>
+            <td class="short">{{ coin.symbol }}</td>
             <td class="short-placeholder"></td><!--this holds 'short's place as an empty element when short is hidden in small viewport sizes-->
-            <td><img class="coin-image" v-bind:src="getCoinImage(coin.short)"></td>
-            <td class="long">{{ coin.long }}</td>
-            <td class="marketcap align-right">{{ coin.mktcap | numeralFormat('($0.00 a)') }}</td>
-            <td v-if="coin.price < 0.020" class="price align-right">{{ coin.price | numeralFormat('$0,0.0000') }}</td>
-            <td v-if="coin.price < 0.500 && coin.price >= 0.020" class="price align-right">{{ coin.price | numeralFormat('$0,0.000') }}</td>
-            <td v-if="coin.price >= 0.500"class="price align-right">{{ coin.price | numeralFormat('$0,0.00') }}</td>
+            <td><img class="coin-image" v-bind:src="getCoinImage(coin.symbol)"></td>
+            <td class="long">{{ coin.name }}</td>
+            <td class="marketcap align-right">{{ coin.marketCapUsd | numeralFormat('($0.00 a)') }}</td>
+            <td v-if="coin.priceUsd < 0.020" class="price align-right">{{ coin.priceUsd | numeralFormat('$0,0.0000') }}</td>
+            <td v-if="coin.priceUsd < 0.500 && coin.priceUsd >= 0.020" class="price align-right">{{ coin.priceUsd | numeralFormat('$0,0.000') }}</td>
+            <td v-if="coin.priceUsd >= 0.500"class="price align-right">{{ coin.priceUsd | numeralFormat('$0,0.00') }}</td>
             <td class="chart">
               <div class="chart-container" style="margin-bottom: -15px; border: 1px solid transparent" v-bind:id="'chartContainer'+(index)"></div>
             </td>
@@ -95,8 +95,6 @@
           </tr>
         </tbody>
       </table>
-      <div id="counter-debug" v-if="coins[0] !== undefined">{{ coins[0].shapeshift }}</div>
-      <!-- debug counter must remain in index.html for now -->
     </div> <!-- Vue app end -->
   </section>
   
@@ -105,7 +103,7 @@
     <div class="footer-inner">
       <div class="footer-inner-left">
         <a id="portfolio" href="https://oliverdavies.me/" title="Oliver Davies Portfolio" target="_blank">oliverdavies.me</a>
-        <div>&copy; Oliver Davies 2018</div>
+        <div>&copy; Oliver Davies 2019</div>
       </div>
       <div class="footer-inner-right">
         <h5 class="footer-resources-title">Resources</h5>
