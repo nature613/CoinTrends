@@ -125,7 +125,7 @@ let app = new Vue({ /*global Vue*/ //from vue.js
             carets[k].classList.toggle("rotated");
           }
       } else {
-        var sorts = ["index","mktcap","price","coinHist"]; //array of possible sorts
+        var sorts = ["index","marketCapUsd","priceUsd","coinHist"]; //array of possible sorts
         var sortIndex = sorts.indexOf(s);
         var sortsOthers = sorts.slice();
         sortsOthers.splice(sortIndex, 1);
@@ -159,8 +159,8 @@ let app = new Vue({ /*global Vue*/ //from vue.js
         let direction = 1;
         if (this.currentSortDir === 'desc') direction = -1;
         if (this.currentSort === 'index' ) direction = -1 * direction;
-        if (a[this.currentSort] < b[this.currentSort]) return -1 * direction;
-        if (a[this.currentSort] > b[this.currentSort]) return 1 * direction;
+        if (parseFloat(a[this.currentSort]) < parseFloat(b[this.currentSort])) return -1 * direction;
+        if (parseFloat(a[this.currentSort]) > parseFloat(b[this.currentSort])) return 1 * direction;
         return 0;
       });
       

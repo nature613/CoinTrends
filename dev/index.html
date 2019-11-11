@@ -42,7 +42,7 @@
                 <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
-            <td @click="sort('mktcap')" id="header-Marketcap" class="header">
+            <td @click="sort('marketCapUsd')" id="header-Marketcap" class="header">
               Market Cap (USD)
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -54,7 +54,7 @@
                 <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
               </div>
             </td>
-            <td @click="sort('price')" id="header-Price" class="header">
+            <td @click="sort('priceUsd')" id="header-Price" class="header">
               Price (USD)
               <div class="loader">
                 <img src="assets/images/loader.svg" type="image/svg+xml"/>
@@ -82,7 +82,7 @@
         </thead>
         <tbody>
           <tr v-cloak v-for="(coin, index) in sortedCoins">
-            <td class="index">{{ coin.rank }}</td>
+            <td class="index">{{ coin.index }}</td>
             <td class="short">{{ coin.symbol }}</td>
             <td class="short-placeholder"></td><!--this holds 'short's place as an empty element when short is hidden in small viewport sizes-->
             <td><img class="coin-image" v-bind:src="getCoinImage(coin.symbol)"></td>
