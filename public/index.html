@@ -1,129 +1,16 @@
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CoinTrends</title>
-  
-  <link rel="apple-touch-icon-precomposed" href="assets/images/apple-touch-icon-precomposed.png">
-	<link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
-  
-  <link href="https://cdn.rawgit.com/h-ibaldo/Raleway_Fixed_Numerals/master/css/rawline.css" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.min.css">
-</head>
-<body>
-
-  <nav>
-    <div class="brand">
-      <div class="brand-image">
-        <img src="assets/images/cointrends.svg" type="image/svg+xml">
-        </div>
-      <div class="brand-title">CoinTrends</div>
-    </div>
-  </nav>
-
-  <section class="container">
-    <div id="app">
-      <table class="table">
-        <thead class="table-row-header">
-          <tr class="table-row-header">
-            <td @click="sort('index')" id="header-Cryptocurrency" class="header" colspan="4">
-              Cryptocurrency
-              <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-0" class="caret">
-                <img src="assets/images/caret.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-fill-0" class="caret-fill">
-                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
-              </div>
-            </td>
-            <td @click="sort('marketCapUsd')" id="header-Marketcap" class="header">
-              Market Cap (USD)
-              <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-1" class="caret">
-                <img src="assets/images/caret.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-fill-1" class="caret-fill">
-                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
-              </div>
-            </td>
-            <td @click="sort('priceUsd')" id="header-Price" class="header">
-              Price (USD)
-              <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-2" class="caret">
-                <img src="assets/images/caret.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-fill-2" class="caret-fill">
-                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
-              </div>
-            </td>
-            <td @click="sort('coinHist')" id="header-Change" class="header" colspan="2">
-              7-Day Change
-              <div class="loader">
-                <img src="assets/images/loader.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-3" class="caret">
-                <img src="assets/images/caret.svg" type="image/svg+xml"/>
-              </div>
-              <div id="caret-fill-3" class="caret-fill">
-                <img src="assets/images/caret-fill.svg" type="image/svg+xml"/>
-              </div>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-cloak v-for="(coin, index) in sortedCoins">
-            <td class="index">{{ coin.index }}</td>
-            <td class="short">{{ coin.symbol }}</td>
-            <td class="short-placeholder"></td><!--this holds 'short's place as an empty element when short is hidden in small viewport sizes-->
-            <td><img class="coin-image" v-bind:src="getCoinImage(coin.symbol)"></td>
-            <td class="long">{{ coin.name }}</td>
-            <td class="marketcap align-right">{{ coin.marketCapUsd | numeralFormat('($0.00 a)') }}</td>
-            <td v-if="coin.priceUsd < 0.020" class="price align-right">{{ coin.priceUsd | numeralFormat('$0,0.0000') }}</td>
-            <td v-if="coin.priceUsd < 0.500 && coin.priceUsd >= 0.020" class="price align-right">{{ coin.priceUsd | numeralFormat('$0,0.000') }}</td>
-            <td v-if="coin.priceUsd >= 0.500"class="price align-right">{{ coin.priceUsd | numeralFormat('$0,0.00') }}</td>
-            <td class="chart">
-              <div class="chart-container" style="margin-bottom: -15px; border: 1px solid transparent" v-bind:id="'chartContainer'+(index)"></div>
-            </td>
-            <td class="coinHist align-right" v-bind:style="{ color: coin.color,}">{{ coin.coinHist | numeralFormat('+0.00') }}%</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> <!-- Vue app end -->
-  </section>
-  
-
-  <footer class="footer-outer">
-    <div class="footer-inner">
-      <div class="footer-inner-left">
-        <a id="portfolio" href="https://oliverdavies.me/" title="Oliver Davies Portfolio" target="_blank">oliverdavies.me</a>
-        <div>&copy; Oliver Davies 2019</div>
-      </div>
-      <div class="footer-inner-right">
-        <h5 class="footer-resources-title">Resources</h5>
-        <div class="footer-resources">
-          <div>
-            <a href="https://canvasjs.com/" title="Beautiful HTML5 JavaScript Charts | CanvasJS" target="_blank"><img class="footer-resources-img" src="assets/images/canvasjs-logo.svg"/><span class="footer-resources-text">CanvasJS</span></a> 
-          </div>
-          <div>
-            <a href="https://github.com/CoinCapDev/CoinCap.io" title="CoinCapDev/CoinCap.io: API tools and documentation" target="_blank"><img class="footer-resources-img" src="assets/images/coincap.png"/><span class="footer-resources-text">CoinCap API v1</span></a>
-          </div>
-          <div>
-            <a href="https://www.cryptocompare.com/api/" title="CryptoCompare API - The only free cryptocurrency data API for over 90 exchanges and 1800 coins" target="_blank"><img class="footer-resources-img" src="assets/images/cryptocompare.png"/><span class="footer-resources-text">CryptoCompare API</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  
-  
-  <script src="assets/scripts.min.js"></script>
-
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>cointrends</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but CoinTrends doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+  </body>
 </html>
