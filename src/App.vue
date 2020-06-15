@@ -1,12 +1,17 @@
 <template>
   <div id="app">
+    <heading/>
   </div>
 </template>
 
 <script>
+import heading from '@/components/heading.vue'
 
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    heading: heading
+  }
 }
 </script>
 
