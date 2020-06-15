@@ -5,13 +5,15 @@
       <div>&copy; Oliver Davies 2020</div>
     </div>
     <div class="footer-inner-right">
-      <h5 class="footer-resources-title">Resources</h5>
+      <h5 class="footer-resources-title">Made with
+        <a href="https://canvasjs.com/" title="Vue.js - The Progressive JavaScript Framework" target="_blank">
+          <img id="vue-logo" src="@/assets/images/vue-logo.png"/>Vue.js</a>, using:</h5>
       <div class="footer-resources">
         <div>
           <a href="https://canvasjs.com/" title="Beautiful HTML5 JavaScript Charts | CanvasJS" target="_blank"><img class="footer-resources-img" src="@/assets/images/canvasjs-logo.svg"/><span class="footer-resources-text">CanvasJS</span></a>
         </div>
         <div>
-          <a href="https://github.com/CoinCapDev/CoinCap.io" title="CoinCapDev/CoinCap.io: API tools and documentation" target="_blank"><img class="footer-resources-img" src="@/assets/images/coincap.png"/><span class="footer-resources-text">CoinCap API v1</span></a>
+          <a href="https://docs.coincap.io/" title="CoinCap.io | Reliable Cryptocurrency Prices and Market Capitalizations" target="_blank"><img class="footer-resources-img" src="@/assets/images/coincap-logo.png"/><span class="footer-resources-text">CoinCap API 2.0</span></a>
         </div>
         <div>
           <a href="https://www.cryptocompare.com/api/" title="CryptoCompare API - The only free cryptocurrency data API for over 90 exchanges and 1800 coins" target="_blank"><img class="footer-resources-img" src="@/assets/images/cryptocompare.png"/><span class="footer-resources-text">CryptoCompare API</span></a>
@@ -45,18 +47,23 @@ export default {
   font-weight: 600;
 }
 .footer-inner-right {
-  width: 200px;
+  width: 250px;
   margin: 0 auto;
 }
 .footer-resources-title {
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding-top: 15px;
   padding-bottom: 15px;
   text-align: center;
+  #vue-logo {
+    height: 0.9rem;
+    vertical-align: baseline;
+  }
 }
 .footer-resources {
   display: grid;
   width: 200px;
+  margin: 0 auto;
 }
 .footer-resources div {
   padding-bottom: 10px;
@@ -89,7 +96,6 @@ export default {
   }
   .footer-inner-right {
     order: 1;
-    width: 150px;
   }
   .footer-resources {
     width: 150px;

@@ -17,6 +17,7 @@ export default {
 #heading {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 #heading {
   .brand {
@@ -24,10 +25,6 @@ export default {
     justify-content: flex-start;
   }
   .brand-image {
-    padding: 1rem 1rem;
-    height: 4rem;
-    font-size: 2rem;
-    padding-right: 0;
     img {
       display: block;
       height: 2rem;
@@ -35,9 +32,10 @@ export default {
     }
   }
   .brand-title {
-    padding: 0.5rem 0.5rem;
     padding-left: 0.35rem;
-    font-size: 2rem;
+    font-family: 'Changa', sans-serif;
+    font-weight: 200;
+    font-size: 2.5rem;
   }
 }
 </style>
