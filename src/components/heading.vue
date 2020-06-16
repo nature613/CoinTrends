@@ -9,8 +9,8 @@
 
 <script>
 export default {
-  name: 'heading'
-}
+  name: 'heading',
+};
 </script>
 
 <style lang="scss" scoped>

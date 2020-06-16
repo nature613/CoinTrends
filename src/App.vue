@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import heading from '@/components/heading.vue'
-import bottom from '@/components/bottom.vue'
+import heading from '@/components/heading.vue';
+import bottom from '@/components/bottom.vue';
 
 export default {
   name: 'app',
   components: {
     heading: heading,
-    bottom: bottom
-  }
-}
+    bottom: bottom,
+  },
+};
 </script>
 
 <style lang="scss">

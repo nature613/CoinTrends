@@ -25,8 +25,8 @@
 
 <script>
 export default {
-  name: 'bottom'
-}
+  name: 'bottom',
+};
 </script>
 
 <style lang="scss" scoped>
