@@ -36,6 +36,7 @@ export default {
   color: #4a4a4a;
   width: 100%;
   padding-bottom: 5px;
+  margin-top: 10px;
 }
 .footer-inner-left {
   width: 25%;

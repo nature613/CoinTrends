@@ -1,19 +1,21 @@
 <template>
   <div id="app">
     <heading class="heading-component"/>
-    <div class="content-component"></div>
+    <coin-table class="content-component"/>
     <bottom class="bottom-component"/>
   </div>
 </template>
 
 <script>
 import heading from '@/components/heading.vue';
+import coinTable from '@/components/coinTable.vue';
 import bottom from '@/components/bottom.vue';
 
 export default {
   name: 'app',
   components: {
     heading: heading,
+    coinTable: coinTable,
     bottom: bottom,
   },
 };
