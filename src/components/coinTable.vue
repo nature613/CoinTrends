@@ -26,7 +26,7 @@
           <td v-if="coin.priceUsd < 0.500 && coin.priceUsd >= 0.020" class="price align-right">{{coin.priceUsd | numeralFormat('$0,0.000')}}</td>
           <td v-if="coin.priceUsd >= 0.500" class="price align-right">{{coin.priceUsd | numeralFormat('$0,0.00')}}</td>
           <td class="chart">
-            <div class="chart-container" style="margin-bottom: -15px; border: 1px solid transparent" :id="`chartContainer-${coin.id}`"></div>
+            <price-hist-chart :coin="coin" :index="index" :chartDrawHandler="chartDrawHandler"/>
           </td>
           <td class="coinHist align-right" :class="getPriceHistClass(coin)">{{coin.coinHist | numeralFormat('+0.00')}}%</td>
         </tr>
@@ -38,6 +38,7 @@
 
 <script>
 import sortIconWithLoader from '@/components/sortIconWithLoader.vue';
+import priceHistChart from '@/components/priceHistChart.vue';
 import Vue from 'vue';
 import axios from 'axios';
 
@@ -49,12 +50,12 @@ export default {
   name: 'coinTable',
   components: {
     sortIconWithLoader: sortIconWithLoader,
+    priceHistChart: priceHistChart,
   },
   data() {
     return {
       coins: [],
       coinData: {},
-      coinHistories: {},
       currentSort: 'rank',
       currentSortDir: 'desc',
       columnHeadings: [
@@ -63,6 +64,7 @@ export default {
         { sortType: 'priceUsd', content: 'Price (USD)', colspan: '1' },
         { sortType: 'coinHist', content: '7-Day Change', colspan: '2' },
       ],
+      chartDrawHandler: false,
       isLoading: true,
       showErrorMessage: false,
     };
@@ -72,7 +74,7 @@ export default {
       .then(() => this.getAndStoreListOfTopCoins())
       .catch(error => this.abort(error))
       .then(() => this.getAndStoreAllCoinHistories())
-      .then(() => this.enableUserControls());
+      .then(() => this.finalisePageContent());
   },
   computed: {
     sortedCoins() {
@@ -92,10 +94,7 @@ export default {
         this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
       }
       this.currentSort = newSortType;
-      for (var i = 0; i < this.coins.length; i++) {
-        // var sortedCoinPrice = this.sortedCoins[i].fullPriceHist;
-        // makeChart(sortedCoinPrice, i);
-      }
+      this.drawChart();
     },
     getAndStoreMiscCoinData() {
       return axios.get(`${CRYPTOCOMPARE_API_URI}/all/coinlist`)
@@ -124,8 +123,18 @@ export default {
           Vue.set(this.coins[coinIndex], 'color', priceChange < 0 ? 'red' : 'green');
         });
     },
+    finalisePageContent() {
+      this.enableUserControls();
+      this.drawChart();
+    },
     enableUserControls() {
       this.isLoading = false;
+    },
+    drawChart() {
+      this.chartDrawHandler = true;
+      this.$nextTick(() => {
+        this.chartDrawHandler = false;
+      });
     },
     getCoinImage(symbol) {
       try {
@@ -174,6 +183,7 @@ export default {
   padding: 10px 0 10px 0;
   position: relative;
   user-select: none;
+  cursor: pointer;
   position: sticky;
   top: 0px;
   z-index: 5;
@@ -243,19 +253,6 @@ td {
     padding-top: 5px;
     padding-bottom: 5px;
   }
-  .chart-container {
-    height: 80px;
-    width: 150px;
-  }
-  .canvasjs-chart-container {
-    overflow: hidden;
-    width: 150px;
-    height: 64px;
-    pointer-events: none;
-  }
-  .canvasjs-chart-canvas {
-    pointer-events: none;
-  }
   &.coinHist {
     padding-right: 10px;
     &.up {
@@ -303,16 +300,6 @@ td {
   }
   td.chart {
     padding-left: 0px;
-  }
-  .canvasjs-chart-canvas {
-    width: 110px;
-  }
-  td .canvasjs-chart-container {
-    height: 64px;
-  }
-  td .chart-container {
-    width: 110px;
-    margin: 0 auto -15px auto;
   }
   td.coinHist {
     padding-right: 3px;
