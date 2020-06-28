@@ -26,7 +26,7 @@
           <td v-if="coin.priceUsd < 0.500 && coin.priceUsd >= 0.020" class="price align-right">{{coin.priceUsd | numeralFormat('$0,0.000')}}</td>
           <td v-if="coin.priceUsd >= 0.500" class="price align-right">{{coin.priceUsd | numeralFormat('$0,0.00')}}</td>
           <td class="chart">
-            <price-hist-chart :coin="coin" :index="index" :chartDrawHandler="chartDrawHandler"/>
+            <price-hist-chart :coin="coin" :index="index" :chartDrawHandler="coin.chartDrawHandler"/>
           </td>
           <td class="coinHist align-right" :class="getPriceHistClass(coin)">{{coin.coinHist | numeralFormat('+0.00')}}%</td>
         </tr>
@@ -64,7 +64,6 @@ export default {
         { sortType: 'priceUsd', content: 'Price (USD)', colspan: '1' },
         { sortType: 'coinHist', content: '7-Day Change', colspan: '2' },
       ],
-      chartDrawHandler: false,
       isLoading: true,
       showErrorMessage: false,
     };
@@ -94,7 +93,7 @@ export default {
         this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
       }
       this.currentSort = newSortType;
-      this.drawChart();
+      this.drawAllCharts();
     },
     getAndStoreMiscCoinData() {
       return axios.get(`${CRYPTOCOMPARE_API_URI}/all/coinlist`)
@@ -105,7 +104,10 @@ export default {
     getAndStoreListOfTopCoins() {
       return axios.get(`${COINCAP_API_URI}/assets`)
         .then(response => {
-          this.coins = response.data.data.slice(0, 20);
+          this.coins = response.data.data.slice(0, 20).map(coin => {
+            Vue.set(coin, 'chartDrawHandler', false);
+            return coin;
+          });
         });
     },
     getAndStoreAllCoinHistories() {
@@ -121,19 +123,29 @@ export default {
           Vue.set(this.coins[coinIndex], 'coinHist', priceChange * 100);
           Vue.set(this.coins[coinIndex], 'fullPriceHist', data);
           Vue.set(this.coins[coinIndex], 'color', priceChange < 0 ? 'red' : 'green');
+          this.drawChart(coinIndex);
         });
     },
     finalisePageContent() {
       this.enableUserControls();
-      this.drawChart();
     },
     enableUserControls() {
       this.isLoading = false;
     },
-    drawChart() {
-      this.chartDrawHandler = true;
+    drawChart(coinIndex) {
+      this.coins[coinIndex].chartDrawHandler = true;
       this.$nextTick(() => {
-        this.chartDrawHandler = false;
+        this.coins[coinIndex].chartDrawHandler = false;
+      });
+    },
+    drawAllCharts() {
+      this.coins.forEach(coin => {
+        coin.chartDrawHandler = true;
+      });
+      this.$nextTick(() => {
+        this.coins.forEach(coin => {
+          coin.chartDrawHandler = false;
+        });
       });
     },
     getCoinImage(symbol) {
